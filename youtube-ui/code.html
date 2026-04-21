@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#f1f1f1",
+                      "secondary-fixed-dim": "#afc6ff",
+                      "surface-container": "#eeeeee",
+                      "on-primary-container": "#fffbff",
+                      "surface-tint": "#c00100",
+                      "surface-container-high": "#e8e8e8",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#2a6fe5",
+                      "primary-fixed-dim": "#ffb4a8",
+                      "primary": "#bc0100",
+                      "background": "#f9f9f9",
+                      "tertiary-fixed": "#e4e2e1",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#ebbbb4",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "on-tertiary-container": "#fffcfb",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#5c5c5c",
+                      "surface-dim": "#dadada",
+                      "error-container": "#ffdad6",
+                      "surface": "#f9f9f9",
+                      "inverse-primary": "#ffb4a8",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#d9e2ff",
+                      "secondary": "#0056c3",
+                      "on-surface-variant": "#603e39",
+                      "on-background": "#1a1c1c",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#ffdad4",
+                      "surface-bright": "#f9f9f9",
+                      "surface-variant": "#e2e2e2",
+                      "on-secondary-container": "#fefcff",
+                      "on-primary-fixed": "#410000",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-secondary-fixed": "#001944",
+                      "inverse-surface": "#2f3131",
+                      "surface-container-low": "#f3f3f3",
+                      "on-primary-fixed-variant": "#930100",
+                      "tertiary-container": "#757474",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#eb0000",
+                      "on-secondary-fixed-variant": "#004299",
+                      "on-secondary": "#ffffff",
+                      "outline": "#956d67",
+                      "on-surface": "#1a1c1c",
+                      "on-tertiary-fixed-variant": "#474746"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": ["Inter"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<nav class="fixed top-0 w-full z-50 h-16 bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-xl flex justify-between items-center px-4 md:px-6 w-full font-['Inter'] tracking-tight antialiased no-border">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all duration-300 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-2xl font-black tracking-tighter text-neutral-900 dark:text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[#bc0100] text-3xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                YouTube
+            </div>
+</div>
+<div class="hidden md:flex flex-1 max-w-2xl justify-center px-8">
+<div class="flex w-full">
+<div class="flex flex-1 items-center bg-surface-container-low rounded-l-full px-4 border border-transparent focus-within:border-outline/30 transition-all">
+<input class="bg-transparent border-none focus:ring-0 w-full py-2 text-on-surface placeholder:text-tertiary" placeholder="Search" type="text"/>
+</div>
+<button class="bg-surface-container px-6 rounded-r-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<button class="ml-4 p-2 bg-surface-container-low hover:bg-surface-container-high rounded-full transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+<div class="flex items-center gap-2 md:gap-4">
+<button class="p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all duration-300 rounded-full active:scale-95 duration-200 ease-in-out md:flex hidden">
+<span class="material-symbols-outlined">video_call</span>
+</button>
+<button class="p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all duration-300 rounded-full active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-2 cursor-pointer border border-outline-variant/20">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional man with a friendly expression in a modern studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjqDkWeK3fb2WCrrfuCqCUoltoUrngy0iu2hDlRiiAmmBBzPKVOF-5jLRwMx3SnL6w0zwKCNHHIAfcL3l5aBS-k-SU11TMpFB70Gsw_80hjFO9wdH4MG5_nKGLcpwNLMq1_3t6bGQDK9rrHIApsGWPzs6x9pFwIEGJKkr42Itpceem5fZXqJVGyy8WCcsQUz6D8CI3BFRGlEgGFzRkhjNlBdcUbc-k2_ATSoWd_wL4MoSGSUNJ0wCuLoydXwPpPZOWpz7Jc92TEBE"/>
+</div>
+</div>
+</nav>
+<div class="flex pt-16">
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-neutral-50 dark:bg-neutral-950 flex flex-col p-4 gap-2 overflow-y-auto hidden md:flex font-['Inter'] text-sm font-medium">
+<a class="flex items-center gap-6 px-4 py-3 bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg transition-colors scale-100 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[#bc0100]" style="font-variation-settings: 'FILL' 1;">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors scale-100 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span>Shorts</span>
+</a>
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors scale-100 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span>Subscriptions</span>
+</a>
+<hr class="my-3 border-transparent"/>
+<div class="px-4 pb-2 text-neutral-900 font-bold tracking-tight">Library</div>
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors scale-100 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">video_library</span>
+<span>Library</span>
+</a>
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors scale-100 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>History</span>
+</a>
+<div class="mt-auto pt-6 flex flex-col gap-2 border-t border-neutral-200 dark:border-neutral-800">
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">flag</span>
+<span>Report</span>
+</a>
+<a class="flex items-center gap-6 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 p-6 bg-surface">
+<div class="flex gap-3 mb-8 overflow-x-auto hide-scrollbar pb-2">
+<button class="px-4 py-1.5 bg-on-surface text-surface rounded-md font-medium text-sm whitespace-nowrap transition-colors">All</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Music</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Gaming</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Live</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Cinema</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Productivity</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Technology</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Design Systems</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface rounded-md font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Cinematography</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 mb-12">
+<!-- Video Card 1 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Landscape photography" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Cinematic wide shot of misty mountains at sunrise with deep teal and golden orange colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVOXr3Of68UqLHRlcdY4pM9l3uk83_evSetrVtoOUgc3Gd-g9G5EzIngaSd6k7QGon228TNta2-0EsNHM1KFzaJlQKq8bhm419W5XhvkdrRSHR6QA9Be8zCMgwz6Sr5FdClW7coeyety7CtYHc5TIqbqgeyXcnP7R_navU2tOSi5ouJKwcJN9QkoHzyVP3BC2FhD-o-n1Uqrh2BBBCr0fqq61X273zxytBUIOtAeeMuxY8AFoYZwq7Ad5QuekQmnsNJHXI4EFzUcs"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">12:45</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="Professional studio portrait of a photographer holding a vintage camera, soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwEZqWmhPg0ma9g-nrgNZvENPHscSaEHNn1OtvlJbqcRpSJFKuEHSNoRo5MYXHBlRP-iZnIq7BfC1EYmK-k-3fkB0TB0BHBlCfGXkOdGx7T4q8suIqnxzFzcd71gUIQPBqaKqCvUnSwtyiX3iwwpYpJ-SURyphs2_VsHUK-IIqhSDZn2xTGt6q8_Y7s9NLe4wfdc4yNgfri4sJFx5GPPZbSIcudyJrbsPMdPGcI0Q0bCPzHOx8tGoYPGlQXAiuTWLuq0Vq1skdZRQ"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">The Art of Visual Storytelling: How to Composition Like a Pro</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors flex items-center gap-1">
+                                Visual Studio 
+                                <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</p>
+<p class="text-tertiary text-sm">1.2M views • 2 days ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 2 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Gaming setup" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean minimalist gaming setup with neon purple and blue ambient lighting on a dark desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9NHjaJQjsrLJ5Ccwgq6GsJwBYaK4Adb3JoOidLbUoEq8HMBROq7oVNLE-qp9b1Nw4hGISfyK_kaqpSoUPqr19y-iU26G-QgcZfW6Gw22vmjIFJ7ojxlBlfVExhOh7WSDONZ7Zw-cvauok95Ekr13bfcFOCnJUuPtxKJstiPzcSY-1JCzjU2-yqAs_VXHsfa44lnwyhvoBscH73nuB5wDAhRULcCix8NCuJttyhxJ4J4kpMGoYzqgxW18nmXSz1Ff8HDhLBYPHY3s"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">24:10</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="Close up of a young tech enthusiast smiling, bright clean office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2hrJE1GTLuiGsbQlpbiUeCq8rlq1FNSLeRBzBK8uQi48htVsmvvkCFhnBnWyd8qrFHFBkWk61tGtHQUlxnaBGnQ4ZODCqKYqq6B4EFJzcRDnlj-REhDuerbq-0GeIwuJkjA5WvgjA6tAhd6RPF_bf4Pn11yDLAXFd77HdVbp3Qpao8EOFBrDS6rkMysYfX8UmTIqdcqDVefqL2BV-k58mWb1_Y0Ea3v_zUWDCqSsxzw16vDa7cAw2e2DqeBGN924KdGrF71B-7Z8"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">Building the Ultimate 2024 Developer Setup</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors">TechFlow Designs</p>
+<p class="text-tertiary text-sm">850K views • 1 week ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 3 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Circuit board" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Extreme close-up of a high-tech motherboard with glowing gold traces and futuristic blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBps-PGKcBurclBiOo_ytxBFzIDEiDHCleF2aSxbjnWvbcyFCUWFLgjHB9zWiRr1ceF58CYL0w_brfXI9EAD-wZA2QJeaCc0cWiGgrG7Q4VfbiB52lHn8lV3V_dldsWwMjmES4mp0L3eZXAimSU3D_WRJkfgpwpxpB0Qm5m0luQoxJhP1AgSmX3FQdDrBMUPPms7qIPlbUHtVhrXNeFqdF2ss8SlhGVd0W5wTl_OtLyd9FhCjvFInfvL16GSVwJEXJipUKnO6xTOJQ"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">15:52</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="A woman with glasses looking thoughtful in a library setting, soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb7knjuAGv8pp6KV8I_hAaPgixBTFjp8YI_NT96-4fj7kPPpxb4IlUJ1Pg5hWvk9IPQvEy5NGohTjWZ5KvpUMG6POciLr5obZ2Eo5f7r0FYXFR-prlzlYpGgCQR_1W8pnZrp-BBYaIUtrdLn3zRNnNIneHvNO0tub6uX1xVeXyhMabFl0Iz6YokzfWhl1_u1tj00PgLw2L5YNDjYdeZYxHxmU9BT-lgEyTQcwz0rf8I0BPOv0SPP3oL1HkxY0MB5kPECIhspIrq-k"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">Quantum Computing Explained: Is it the End of Cryptography?</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors">SciMinded</p>
+<p class="text-tertiary text-sm">3.4M views • 1 month ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 4 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Music production" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="DJs hands on a mixer in a dark club with vibrant strobe lights and smoke in the air" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd1Avwup9JVX-e2ZJB2f99Db6aYE0W9Z4VWVEC-zS0o6JGUfIXGzow7X_x7iyP7_MOHEJA6viLj0_Odj6za3hfpQNMDm_tvwtHjsR9QH-G6XiYm8bd65Isor47MpmAJGCUL_2GBE97wTDPpKxXeyU7eaG3DKhTVXV2pGXoRMweeQPFyEnO-PFNis7sBrnm3z0JiG9ESnwG_KWgbWS2KI3orvSl6kaTFNw_X1LoemiqBLhbihH0bDJdvTuGNGetbs31G_wqSzKNtaA"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">3:14:00</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="Close up of a stylized icon representing deep house music on a textured grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClxin_LiWIZOwEXnhVvJue5r2HByT61WyI264Tz9-Bbc8eZmBiam3hp2W1ikGCD9v_LUDhY9wGozZyGXc_1HLYG5Sm5XjRPE0EwZdoNb9iVcj8vVvHYw167-SUl91SxdO-6TWeFUnZ-ZWb1v-AN4zhK_Qhz8akzY241zz0_Ec2oRpqxAMiSF70Bnf6S23MFT6VO-s5haTdiVIQLdORHgz5kXeustRPFU8afFXYmy1l1-MvP38hHXiFXOHirIB7ryPzE7W2fM0tAQ0"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">Deep House Sessions 2024 • Work &amp; Study Mix</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors">Midnight Beats</p>
+<p class="text-tertiary text-sm">450K views • Live</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 mb-12">
+<!-- Video Card 5 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Travel" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Breathtaking aerial view of a wooden boat on a turquoise crystal clear lake surrounded by pine forest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8dO3yGkz3GTg9j3VxKiQZJqKdMHLJthuNGuBIVaUBtJP1zG1ymJ5ZBeBaBD2ChHtRWuhStaj7cqtraOqpbvRr4N6ozXn-8CQWwfUh5YENcymgj7H-RlKNYVvA1_eiXLNZXTvOfzcKO6cnpf1eME5qV047Bceu6nuc6r5wtAdPwE8zYkbWDo-A5Vh-FlzRVyorQlmpSdnoF_JyrrfUUheRg3ZAkr8T_YafKMvyBNciZE4r0VGDMgtdgVvZtsLNecu5SoKNSJU3N8A"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">18:22</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="Cheerful woman with a backpack in an outdoor travel setting, soft focus park background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdDpphcfccRh8hqb9JBsZtgETMqRmK2In3pME_EWyK_j4VdSjCaVbtw7udnstI2KrUndxxM6Ne4ayLcb8VEAUYIIyv_KMXoqmre6bC4xwk7eeTatxYEtO-dBosIYLncd5bRI5YHWFs43PgDyQF6y7lBOULfpGSrC6ZqoKLqXS25DGdnbjl_AZWjCljBBPx4yOb-AOPmQ39EMyy1t8Z6xW6Nyz-bWBxSAU2Lu7Nsz1YJF7o7bv_DEv0ROITCUdNFhQjnWFIFIQZd-k"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">10 Hidden Paradises You Need to Visit Before They Disappear</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors flex items-center gap-1">
+                                Wanderlust Diaries
+                                <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</p>
+<p class="text-tertiary text-sm">2.1M views • 3 days ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 6 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Coding" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Side view of high quality computer code on a monitor in a dimly lit room, soft purple glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyD-HX6_BkdT_KkwfW7xmewGMxKwxRPIeIpvd67aWZWsXZCCwM5X2EHv2vv0ebNk5spXfebtytZVCp89ogs2Cc6eWlViPkrTEBd_1nBYoTy-b905EdwzOyoyhvYfYP1v-35BP2hd0FGHoYMVBunnxfZNhjsLrUOzqaz3XRDz_fidEjIlr0q7Tv44b9zlkHOn3NXdZH6rkth5_Lm-KvOZ5A3agOPCYi70i8inXm-GI7NIKx99me33APHr46Np-Dmg0YGILRQVNeaTg"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">08:05</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="A middle-aged man in a professional grey shirt looking directly at the camera with confidence" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCui6oZ1ReBVZNS7ODDEN5Lathe9VublQnNp-1m94-b1nkc6cyRtuQtAiut8cihhSBvt1XPb9wyI85vXIhQAUETO0E8fiw748_nXlQ9A92FbEiumDR9PgZFM45L3L4LwKxDzw2V151nVGGqN0pBcgIvsodkMIv5zdWhaWyiTuIU0gYGVytN8UX5Romh2QT0gtaxMaqBmFhq8PvOgRTfz6KLugbcYrN6AjMiRjdrxFm9ExKy6HYOKubQGG9f07sSKGmbSmqYdEegXhA"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">Mastering Tailwind CSS: 5 Pro Tips to Speed Up Your Workflow</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors">Code Masters</p>
+<p class="text-tertiary text-sm">120K views • 5 hours ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 7 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Stock market" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Dynamic graph of financial charts and trading candles on a dark digital screen, glowing green and red" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfv3uOcruYv8oUL7oJqlDr3ME-gMFiLMiHZ0uNDNDF55TafHYaFCENRe36OqrRQKihOZDs5Th3nZi_0nucm9qPI1UNerqRUku5rONDfmn-CQkzM3uv-hHTu_tNEAb29gfcL6G-SvLbU2Chug_8izhnvBRDxCyn4cOpXLSNLbnDuQc6ljC06Pbwm9U7rqcnlyrzvIOtSKAI7_20meSchTDWbEz8hPDtsZNrBIypuAtIQXzAOkBdiINaCk20ylo5k4of_y2YlNEw8sU"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">10:30</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="Close up of a businessman in a dark suit adjusting his tie, elegant office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATQCKxCXQ8Bi8Zfe1SRhQEqUURCl4Fk5NFjafqLmIB-JWkQEr-F0OYbN6AG-Q9V1wtOCsy1XCzBhStCvvB1IyqYZliSUhLegWixle8V4aVrG4ihSg_sqQYNbtHDAx88SlDFkNVGYohRzk8VTY9asmNbCV-ip-rd3n04Xl69EGdzAJGcv2raEHSXhGCXrohqn9UVa3c0AQRRpSxWVUEHNh072_UXTvQ0627YhVf7fBJYjGLY0TRbBJFUgFY1czlG3Eao3DI2G16TC0"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">The 2024 Market Crash: Is Your Portfolio Ready?</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors">Wealth Strategy</p>
+<p class="text-tertiary text-sm">620K views • 4 days ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 8 -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
+<img alt="Food" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A delicious wood-fired pizza with fresh basil and melting buffalo mozzarella on a rustic table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_KuNSzQacm3-UUpW9CUz6hC3Op6PAZHd0gPCBmX9fG9J8yfzV37UHooo4XSWp4rCU8tU-Uy6ey0lDmUSe9b5n8CgWS7dw1uMXdMNijWL6k3GmhMxUm9n6tQRdOPZhcwRGWpA93-FO4j2-fMCDFesCucVY9ufgoZziXH6ux8D8ITZU7depOh5D-2twheS9UmtPrbCWkj6rUWJJHon_fzCH0udB80y99OLEkx6EjBI_w-vqHTXrQLDTngUH65ZFANvGpoFcNkX8p_k"/>
+<div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-1.5 py-0.5 rounded leading-none">14:08</div>
+</div>
+<div class="flex gap-3">
+<div class="flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
+<img alt="Channel" class="w-full h-full object-cover" data-alt="Close up of a professional chef in a white uniform smiling in a kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJIhzICviEkCY9oMsNH38ShPEAJSRJnbQqsdz-zdZXrCQrbIKjetX2t6JI7ZGYu2igYcGK9WOdLqCYoZ80O8NYlIZTgqPpiRs4EB2CGUCEpBGaF88mKYyRTrXCHuKx4fxKxZkEaB5kgYHNWrBItnLKOPP2H6DqphbjmNRH2kegLEKEnn9eX2lcLNclwYXpQtX2utGmAUqFZ7U9ffVlOlCg45oEe5oWlWRd9GryElXg3VqbtZi55OjJzR_DZZit4-OimgZAxoZNDhg"/>
+</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">The Secret to Authentic Neapolitan Pizza at Home</h3>
+<p class="text-tertiary text-sm hover:text-on-surface transition-colors">Chef's Table</p>
+<p class="text-tertiary text-sm">3M views • 2 weeks ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Shorts Section Moved to Bottom -->
+<div class="mb-12 border-y border-outline-variant/10 py-6">
+<div class="flex items-center gap-2 mb-4 px-2">
+<span class="material-symbols-outlined text-[#bc0100] text-2xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<h2 class="text-xl font-bold tracking-tight">Shorts</h2>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+<!-- Skeleton Short 1 -->
+<div class="flex flex-col gap-2 cursor-pointer group">
+<div class="relative aspect-[9/16] w-full bg-surface-container-high rounded-xl overflow-hidden">
+<img alt="Storytelling short" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVOXr3Of68UqLHRlcdY4pM9l3uk83_evSetrVtoOUgc3Gd-g9G5EzIngaSd6k7QGon228TNta2-0EsNHM1KFzaJlQKq8bhm419W5XhvkdrRSHR6QA9Be8zCMgwz6Sr5FdClW7coeyety7CtYHc5TIqbqgeyXcnP7R_navU2tOSi5ouJKwcJN9QkoHzyVP3BC2FhD-o-n1Uqrh2BBBCr0fqq61X273zxytBUIOtAeeMuxY8AFoYZwq7Ad5QuekQmnsNJHXI4EFzUcs"/>
+</div>
+<div class="flex flex-col px-1">
+<h3 class="text-sm font-semibold line-clamp-2 leading-snug">3 Composition Rules for Better Photos! 📸</h3>
+<p class="text-tertiary text-xs mt-0.5">1.2M views</p>
+</div>
+</div>
+<!-- Skeleton Short 2 -->
+<div class="flex flex-col gap-2 cursor-pointer group">
+<div class="relative aspect-[9/16] w-full bg-surface-container-high rounded-xl overflow-hidden">
+<img alt="Setup short" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9NHjaJQjsrLJ5Ccwgq6GsJwBYaK4Adb3JoOidLbUoEq8HMBROq7oVNLE-qp9b1Nw4hGISfyK_kaqpSoUPqr19y-iU26G-QgcZfW6Gw22vmjIFJ7ojxlBlfVExhOh7WSDONZ7Zw-cvauok95Ekr13bfcFOCnJUuPtxKJstiPzcSY-1JCzjU2-yqAs_VXHsfa44lnwyhvoBscH73nuB5wDAhRULcCix8NCuJttyhxJ4J4kpMGoYzqgxW18nmXSz1Ff8HDhLBYPHY3s"/>
+</div>
+<div class="flex flex-col px-1">
+<h3 class="text-sm font-semibold line-clamp-2 leading-snug">My Minimalist Desk Setup 💻</h3>
+<p class="text-tertiary text-xs mt-0.5">850K views</p>
+</div>
+</div>
+<!-- Skeleton Short 3 -->
+<div class="flex flex-col gap-2 cursor-pointer group">
+<div class="relative aspect-[9/16] w-full bg-surface-container-high rounded-xl overflow-hidden">
+<img alt="Quantum short" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBps-PGKcBurclBiOo_ytxBFzIDEiDHCleF2aSxbjnWvbcyFCUWFLgjHB9zWiRr1ceF58CYL0w_brfXI9EAD-wZA2QJeaCc0cWiGgrG7Q4VfbiB52lHn8lV3V_dldsWwMjmES4mp0L3eZXAimSU3D_WRJkfgpwpxpB0Qm5m0luQoxJhP1AgSmX3FQdDrBMUPPms7qIPlbUHtVhrXNeFqdF2ss8SlhGVd0W5wTl_OtLyd9FhCjvFInfvL16GSVwJEXJipUKnO6xTOJQ"/>
+</div>
+<div class="flex flex-col px-1">
+<h3 class="text-sm font-semibold line-clamp-2 leading-snug">Quantum Bits Explained in 60 Seconds ⚛️</h3>
+<p class="text-tertiary text-xs mt-0.5">3.4M views</p>
+</div>
+</div>
+<!-- Skeleton Short 4 -->
+<div class="flex flex-col gap-2 cursor-pointer group">
+<div class="relative aspect-[9/16] w-full bg-surface-container-high rounded-xl overflow-hidden">
+<img alt="Music short" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd1Avwup9JVX-e2ZJB2f99Db6aYE0W9Z4VWVEC-zS0o6JGUfIXGzow7X_x7iyP7_MOHEJA6viLj0_Odj6za3hfpQNMDm_tvwtHjsR9QH-G6XiYm8bd65Isor47MpmAJGCUL_2GBE97wTDPpKxXeyU7eaG3DKhTVXV2pGXoRMweeQPFyEnO-PFNis7sBrnm3z0JiG9ESnwG_KWgbWS2KI3orvSl6kaTFNw_X1LoemiqBLhbihH0bDJdvTuGNGetbs31G_wqSzKNtaA"/>
+</div>
+<div class="flex flex-col px-1">
+<h3 class="text-sm font-semibold line-clamp-2 leading-snug">Late Night Studio Vibes 🎹</h3>
+<p class="text-tertiary text-xs mt-0.5">450K views</p>
+</div>
+</div>
+<!-- Skeleton Short 5 -->
+<div class="hidden lg:flex flex-col gap-2 cursor-pointer group">
+<div class="relative aspect-[9/16] w-full bg-surface-container-high rounded-xl overflow-hidden">
+<img alt="Travel short" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8dO3yGkz3GTg9j3VxKiQZJqKdMHLJthuNGuBIVaUBtJP1zG1ymJ5ZBeBaBD2ChHtRWuhStaj7cqtraOqpbvRr4N6ozXn-8CQWwfUh5YENcymgj7H-RlKNYVvA1_eiXLNZXTvOfzcKO6cnpf1eME5qV047Bceu6nuc6r5wtAdPwE8zYkbWDo-A5Vh-FlzRVyorQlmpSdnoF_JyrrfUUheRg3ZAkr8T_YafKMvyBNciZE4r0VGDMgtdgVvZtsLNecu5SoKNSJU3N8A"/>
+</div>
+<div class="flex flex-col px-1">
+<h3 class="text-sm font-semibold line-clamp-2 leading-snug">Crystal Clear Waters in Italy 🇮🇹</h3>
+<p class="text-tertiary text-xs mt-0.5">2.1M views</p>
+</div>
+</div>
+<!-- Skeleton Short 6 -->
+<div class="hidden xl:flex flex-col gap-2 cursor-pointer group">
+<div class="relative aspect-[9/16] w-full bg-surface-container-high rounded-xl overflow-hidden">
+<img alt="Coding short" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyD-HX6_BkdT_KkwfW7xmewGMxKwxRPIeIpvd67aWZWsXZCCwM5X2EHv2vv0ebNk5spXfebtytZVCp89ogs2Cc6eWlViPkrTEBd_1nBYoTy-b905EdwzOyoyhvYfYP1v-35BP2hd0FGHoYMVBunnxfZNhjsLrUOzqaz3XRDz_fidEjIlr0q7Tv44b9zlkHOn3NXdZH6rkth5_Lm-KvOZ5A3agOPCYi70i8inXm-GI7NIKx99me33APHr46Np-Dmg0YGILRQVNeaTg"/>
+</div>
+<div class="flex flex-col px-1">
+<h3 class="text-sm font-semibold line-clamp-2 leading-snug">Tailwind Trick: Group Hover! 💨</h3>
+<p class="text-tertiary text-xs mt-0.5">120K views</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<nav class="fixed bottom-0 left-0 right-0 h-14 bg-surface/90 backdrop-blur-lg md:hidden flex justify-around items-center px-4 z-50">
+<a class="flex flex-col items-center gap-1 text-[#bc0100]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-tertiary" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-[10px] font-medium">Shorts</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-tertiary" href="#">
+<span class="material-symbols-outlined text-2xl">add_circle</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-tertiary" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span class="text-[10px] font-medium">Subs</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-tertiary" href="#">
+<span class="material-symbols-outlined">video_library</span>
+<span class="text-[10px] font-medium">Library</span>
+</a>
+</nav>
+</body></html>
