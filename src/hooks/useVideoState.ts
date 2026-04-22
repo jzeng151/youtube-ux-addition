@@ -70,5 +70,7 @@ export function useVideoState() {
   const latestDismissed =
     state.recentlyDismissed.length > 0 ? state.recentlyDismissed[0] : null;
 
-  return { getStatus, markWatched, dismiss, undoDismiss, latestDismissed };
+  const dismissedVideos = state.recentlyDismissed;
+
+  return { getStatus, markWatched, dismiss, undoDismiss, latestDismissed, dismissedVideos };
 }

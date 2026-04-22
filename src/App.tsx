@@ -4,9 +4,10 @@ import Sidebar from "./components/Sidebar";
 import CategoryChips from "./components/CategoryChips";
 import VideoGrid from "./components/VideoGrid";
 import ShortsGrid from "./components/ShortsGrid";
+import HiddenVideos from "./components/HiddenVideos";
 import DismissToast from "./components/DismissToast";
 import ContextMenu from "./components/ContextMenu";
-import { mockVideos } from "./data/mockVideos";
+import { mockVideos, allVideos } from "./data/mockVideos";
 import { useVideoState } from "./hooks/useVideoState";
 
 interface ContextMenuState {
@@ -16,12 +17,21 @@ interface ContextMenuState {
 }
 
 export default function App() {
-  const { getStatus, markWatched, dismiss, undoDismiss, latestDismissed } =
+  const { getStatus, markWatched, dismiss, undoDismiss, latestDismissed, dismissedVideos } =
     useVideoState();
 
+  const [currentPage, setCurrentPage] = useState(() => {
+    const hash = window.location.hash.replace("#", "");
+    return hash || "home";
+  });
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastTitle, setToastTitle] = useState<string | null>(null);
+
+  const handleNavigate = useCallback((page: string) => {
+    window.location.hash = page;
+    setCurrentPage(page);
+  }, []);
 
   const handleContextMenu = useCallback(
     (e: React.MouseEvent, videoId: string) => {
@@ -49,25 +59,48 @@ export default function App() {
     }
   }, [latestDismissed, undoDismiss]);
 
+  const handleRestore = useCallback((id: string) => {
+    undoDismiss(id);
+  }, [undoDismiss]);
+
+  const hiddenVideos = allVideos.filter((v) => dismissedVideos.some((d) => d.id === v.id));
+
   return (
     <>
       <TopNav />
 
       <div className="flex pt-16">
-        <Sidebar />
+        <Sidebar
+          currentPage={currentPage}
+          onNavigate={handleNavigate}
+          hiddenCount={dismissedVideos.length}
+        />
 
         <main className="flex-1 md:ml-64 p-6 bg-surface">
-          <CategoryChips />
-
-          <VideoGrid
-            videos={mockVideos}
-            getStatus={getStatus}
-            onDismiss={handleDismiss}
-            onMarkWatched={markWatched}
-            onContextMenu={handleContextMenu}
-          />
-
-          <ShortsGrid />
+          {currentPage === "home" && (
+            <>
+              <CategoryChips />
+              <VideoGrid
+                videos={mockVideos}
+                getStatus={getStatus}
+                onDismiss={handleDismiss}
+                onMarkWatched={markWatched}
+                onContextMenu={handleContextMenu}
+              />
+              <ShortsGrid />
+            </>
+          )}
+          {currentPage === "hidden" && (
+            <HiddenVideos videos={hiddenVideos} onRestore={handleRestore} />
+          )}
+          {currentPage !== "home" && currentPage !== "hidden" && (
+            <div className="flex flex-col items-center justify-center py-20 text-tertiary">
+              <span className="material-symbols-outlined text-[64px] mb-4 opacity-30">
+                construction
+              </span>
+              <p className="text-lg font-medium">Coming soon</p>
+            </div>
+          )}
         </main>
       </div>
 

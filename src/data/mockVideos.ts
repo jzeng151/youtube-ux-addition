@@ -10,7 +10,17 @@ export interface Video {
   isVerified?: boolean;
 }
 
-export const mockVideos: Video[] = [
+/** Fisher-Yates shuffle — returns a new array */
+export function shuffleVideos<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+export const allVideos: Video[] = [
   {
     id: "v1",
     title: "The Art of Visual Storytelling: How to Composition Like a Pro",
@@ -93,4 +103,132 @@ export const mockVideos: Video[] = [
     thumbnailUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuD_KuNSzQacm3-UUpW9CUz6hC3Op6PAZHd0gPCBmX9fG9J8yfzV37UHooo4XSWp4rCU8tU-Uy6ey0lDmUSe9b5n8CgWS7dw1uMXdMNijWL6k3GmhMxUm9n6tQRdOPZhcwRGWpA93-FO4j2-fMCDFesCucVY9ufgoZziXH6ux8D8ITZU7depOh5D-2twheS9UmtPrbCWkj6rUWJJHon_fzCH0udB80y99OLEkx6EjBI_w-vqHTXrQLDTngUH65ZFANvGpoFcNkX8p_k",
     duration: "14:08",
   },
+  {
+    id: "v9",
+    title: "Why 90% of Startups Fail — And How to Be in the 10%",
+    channel: "Entrepreneur Lab",
+    channelAvatar: "https://picsum.photos/seed/elab/100/100",
+    views: "1.8M views",
+    timestamp: "1 week ago",
+    thumbnailUrl: "https://picsum.photos/seed/startup-fail/640/360",
+    duration: "19:34",
+    isVerified: true,
+  },
+  {
+    id: "v10",
+    title: "Morning Routine of a Top CEO: 5AM to 9PM Full Day",
+    channel: "Life Optimized",
+    channelAvatar: "https://picsum.photos/seed/lifeopt/100/100",
+    views: "4.2M views",
+    timestamp: "5 days ago",
+    thumbnailUrl: "https://picsum.photos/seed/ceo-routine/640/360",
+    duration: "22:15",
+    isVerified: true,
+  },
+  {
+    id: "v11",
+    title: "React vs Vue vs Angular in 2024 — Which Should You Learn?",
+    channel: "Code Masters",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCui6oZ1ReBVZNS7ODDEN5Lathe9VublQnNp-1m94-b1nkc6cyRtuQtAiut8cihhSBvt1XPb9wyI85vXIhQAUETO0E8fiw748_nXlQ9A92FbEiumDR9PgZFM45L3L4LwKxDzw2V151nVGGqN0pBcgIvsodkMIv5zdWhaWyiTuIU0gYGVytN8UX5Romh2QT0gtaxMaqBmFhq8PvOgRTfz6KLugbcYrN6AjMiRjdrxFm9ExKy6HYOKubQGG9f07sSKGmbSmqYdEegXhA",
+    views: "970K views",
+    timestamp: "3 days ago",
+    thumbnailUrl: "https://picsum.photos/seed/react-vue-angular/640/360",
+    duration: "16:42",
+  },
+  {
+    id: "v12",
+    title: "How Black Holes Actually Work — A Visual Journey",
+    channel: "SciMinded",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDb7knjuAGv8pp6KV8I_hAaPgixBTFjp8YI_NT96-4fj7kPPpxb4IlUJ1Pg5hWvk9IPQvEy5NGohTjWZ5KvpUMG6POciLr5obZ2Eo5f7r0FYXFR-prlzlYpGgCQR_1W8pnZrp-BBYaIUtrdLn3zRNnNIneHvNO0tub6uX1xVeXyhMabFl0Iz6YokzfWhl1_u1tj00PgLw2L5YNDjYdeZYxHxmU9BT-lgEyTQcwz0rf8I0BPOv0SPP3oL1HkxY0MB5kPECIhspIrq-k",
+    views: "7.5M views",
+    timestamp: "2 months ago",
+    thumbnailUrl: "https://picsum.photos/seed/black-holes/640/360",
+    duration: "21:08",
+  },
+  {
+    id: "v13",
+    title: "I Lived in Japan for 30 Days on $50 a Day — Here's How",
+    channel: "Wanderlust Diaries",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAdDpphcfccRh8hqb9JBsZtgETMqRmK2In3pME_EWyK_j4VdSjCaVbtw7udnstI2KrUndxxM6Ne4ayLcb8VEAUYIIyv_KMXoqmre6bC4xwk7eeTatxYEtO-dBosIYLncd5bRI5YHWFs43PgDyQF6y7lBOULfpGSrC6ZqoKLqXS25DGdnbjl_AZWjCljBBPx4yOb-AOPmQ39EMyy1t8Z6xW6Nyz-bWBxSAU2Lu7Nsz1YJF7o7bv_DEv0ROITCUdNFhQjnWFIFIQZd-k",
+    views: "2.8M views",
+    timestamp: "1 week ago",
+    thumbnailUrl: "https://picsum.photos/seed/japan-budget/640/360",
+    duration: "25:41",
+    isVerified: true,
+  },
+  {
+    id: "v14",
+    title: "Chill Lo-Fi Beats to Code to \u2022 24/7 Live Stream",
+    channel: "Midnight Beats",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuClxin_LiWIZOwEXnhVvJue5r2HByT61WyI264Tz9-Bbc8eZmBiam3hp2W1ikGCD9v_LUDhY9wGozZyGXc_1HLYG5Sm5XjRPE0EwZdoNb9iVcj8vVvHYw167-SUl91SxdO-6TWeFUnZ-ZWb1v-AN4zhK_Qhz8akzY241zz0_Ec2oRpqxAMiSF70Bnf6S23MFT6VO-s5haTdiVIQLdORHgz5kXeustRPFU8afFXYmy1l1-MvP38hHXiFXOHirIB7ryPzE7W2fM0tAQ0",
+    views: "12M views",
+    timestamp: "Live",
+    thumbnailUrl: "https://picsum.photos/seed/lofi-coding/640/360",
+    duration: "8:42:00",
+  },
+  {
+    id: "v15",
+    title: "The Perfect Steak: Science vs Tradition",
+    channel: "Chef's Table",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCJIhzICviEkCY9oMsNH38ShPEAJSRJnbQqsdz-zdZXrCQrbIKjetX2t6JI7ZGYu2igYcGK9WOdLqCYoZ80O8NYlIZTgqPpiRs4EB2CGUCEpBGaF88mKYyRTrXCHuKx4fxKxZkEaB5kgYHNWrBItnLKOPP2H6DqphbjmNRH2kegLEKEnn9eX2lcLNclwYXpQtX2utGmAUqFZ7U9ffVlOlCg45oEe5oWlWRd9GryElXg3VqbtZi55OjJzR_DZZit4-OimgZAxoZNDhg",
+    views: "5.1M views",
+    timestamp: "3 weeks ago",
+    thumbnailUrl: "https://picsum.photos/seed/perfect-steak/640/360",
+    duration: "17:55",
+  },
+  {
+    id: "v16",
+    title: "How I Made $1M from a Side Project — Full Breakdown",
+    channel: "Wealth Strategy",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuATQCKxCXQ8Bi8Zfe1SRhQEqUURCl4Fk5NFjafqLmIB-JWkQEr-F0OYbN6AG-Q9V1wtOCsy1XCzBhStCvvB1IyqYZliSUhLegWixle8V4aVrG4ihSg_sqQYNbtHDAx88SlDFkNVGYohRzk8VTY9asmNbCV-ip-rd3n04Xl69EGdzAJGcv2raEHSXhGCXrohqn9UVa3c0AQRRpSxWVUEHNh072_UXTvQ0627YhVf7fBJYjGLY0TRbBJFUgFY1czlG3Eao3DI2G16TC0",
+    views: "3.6M views",
+    timestamp: "6 days ago",
+    thumbnailUrl: "https://picsum.photos/seed/side-hustle/640/360",
+    duration: "28:03",
+  },
+  {
+    id: "v17",
+    title: "Designing in Figma: Tips They Don't Teach in School",
+    channel: "Visual Studio",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDwEZqWmhPg0ma9g-nrgNZvENPHscSaEHNn1OtvlJbqcRpSJFKuEHSNoRo5MYXHBlRP-iZnIq7BfC1EYmK-k-3fkB0TB0BHBlCfGXkOdGx7T4q8suIqnxzFzcd71gUIQPBqaKqCvUnSwtyiX3iwwpYpJ-SURyphs2_VsHUK-IIqhSDZn2xTGt6q8_Y7s9NLe4wfdc4yNgfri4sJFx5GPPZbSIcudyJrbsPMdPGcI0Q0bCPzHOx8tGoYPGlQXAiuTWLuq0Vq1skdZRQ",
+    views: "780K views",
+    timestamp: "12 hours ago",
+    thumbnailUrl: "https://picsum.photos/seed/figma-tips/640/360",
+    duration: "13:20",
+    isVerified: true,
+  },
+  {
+    id: "v18",
+    title: "Inside a $50M Smart Home — The Future of Living",
+    channel: "TechFlow Designs",
+    channelAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC2hrJE1GTLuiGsbQlpbiUeCq8rlq1FNSLeRBzBK8uQi48htVsmvvkCFhnBnWyd8qrFHFBkWk61tGtHQUlxnaBGnQ4ZODCqKYqq6B4EFJzcRDnlj-REhDuerbq-0GeIwuJkjA5WvgjA6tAhd6RPF_bf4Pn11yDLAXFd77HdVbp3Qpao8EOFBrDS6rkMysYfX8UmTIqdcqDVefqL2BV-k58mWb1_Y0Ea3v_zUWDCqSsxzw16vDa7cAw2e2DqeBGN924KdGrF71B-7Z8",
+    views: "6.9M views",
+    timestamp: "2 days ago",
+    thumbnailUrl: "https://picsum.photos/seed/smart-home/640/360",
+    duration: "31:45",
+  },
+  {
+    id: "v19",
+    title: "AI Won't Take Your Job — But This Will",
+    channel: "Entrepreneur Lab",
+    channelAvatar: "https://picsum.photos/seed/elab/100/100",
+    views: "2.4M views",
+    timestamp: "4 days ago",
+    thumbnailUrl: "https://picsum.photos/seed/ai-jobs/640/360",
+    duration: "11:57",
+    isVerified: true,
+  },
+  {
+    id: "v20",
+    title: "The Psychology of Color in Film: Why You Feel What You Feel",
+    channel: "Life Optimized",
+    channelAvatar: "https://picsum.photos/seed/lifeopt/100/100",
+    views: "1.1M views",
+    timestamp: "1 month ago",
+    thumbnailUrl: "https://picsum.photos/seed/color-psych/640/360",
+    duration: "20:33",
+    isVerified: true,
+  },
 ];
+
+export const mockVideos = shuffleVideos(allVideos).slice(0, 8);
