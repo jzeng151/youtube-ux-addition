@@ -1,6 +1,8 @@
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import type { Video } from "../data/mockVideos";
 import type { VideoStatus } from "../hooks/useVideoState";
+import VideoMenu from "./VideoMenu";
 
 interface VideoCardProps {
   video: Video;
@@ -20,6 +22,8 @@ export default function VideoCard({
   onContextMenu,
 }: VideoCardProps) {
   const isWatched = status === "watched";
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <motion.div
@@ -27,6 +31,9 @@ export default function VideoCard({
       exit={{ opacity: 0, scale: 0.8, filter: "grayscale(100%)" }}
       transition={springTransition}
       className="flex flex-col group cursor-pointer"
+      onClick={() => {
+        if (!isWatched) onMarkWatched(video.id);
+      }}
     >
       <div className="relative aspect-video rounded-lg overflow-hidden bg-surface-container-low mb-3">
         <img
@@ -75,13 +82,13 @@ export default function VideoCard({
         )}
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 relative">
         <div className="flex-shrink-0">
           <div className="w-9 h-9 rounded-full overflow-hidden bg-surface-container">
             <img alt={video.channel} className="w-full h-full object-cover" src={video.channelAvatar} />
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex-1 flex flex-col">
           <h3 className="text-on-surface font-semibold line-clamp-2 leading-tight mb-1 text-[15px]">
             {video.title}
           </h3>
@@ -100,6 +107,28 @@ export default function VideoCard({
             {video.views} &bull; {video.timestamp}
           </p>
         </div>
+
+        {/* Three-dot menu button */}
+        <button
+          ref={menuButtonRef}
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuOpen((prev) => !prev);
+          }}
+          className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:outline hover:outline-1 hover:outline-black/10 transition-all duration-150"
+          aria-label="More options"
+        >
+          <span className="material-symbols-outlined text-[20px] text-on-surface">
+            more_vert
+          </span>
+        </button>
+
+        {menuOpen && (
+          <VideoMenu
+            onClose={() => setMenuOpen(false)}
+            anchorRef={menuButtonRef}
+          />
+        )}
       </div>
     </motion.div>
   );
